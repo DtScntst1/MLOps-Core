@@ -12,10 +12,10 @@ jobs:
     
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: '3.10'
         
@@ -26,7 +26,7 @@ jobs:
         
     - name: Run Unit Tests
       run: |
-        pytest tests/
+        python -m pytest tests/
         
     - name: Train Model & Generate Reports
       run: |
@@ -37,7 +37,7 @@ jobs:
         cat reports/metrics.md >> $GITHUB_STEP_SUMMARY
         
     - name: Upload Confusion Matrix Artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: confusion-matrix
         path: reports/confusion_matrix.png
